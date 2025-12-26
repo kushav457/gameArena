@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema(
   {
     password: {
-      requrired: true,
+      required: true,
       type: String,
       trim: true,
       min: 8,

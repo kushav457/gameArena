@@ -52,6 +52,50 @@ const createGame = async (req, res) => {
     });
   }
 };
+//List all game
+const listAllGame = async (req, res) => {
+  try {
+    const { limit = 25, page = 1, genre, status, keyword } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    // TODO: imlement date filter
+    //filter object
+    const where = {
+      // genre,
+      // status,
+      title: { $regex: keyword || "", $options: "i" },
+      desc: { $regex: keyword || "", $options: "i" },
+    };
+    if (genre) {
+      where.genre = genre;
+    }
+    if (status) {
+      where.status = status;
+    }
+    console.log("where", where);
+    const games = await gameModel.find(where).limit(parseInt(limit)).skip(skip);
+    const totalDataCount = await gameModel.countDocuments(where);
+    console.log("total", totalDataCount);
+    const totalPages = Math.ceil(totalDataCount / parseInt(limit));
+    console.log("totalPages", totalPages);
+
+    res.status(200).json({
+      success: true,
+      totalPages,
+      currentPage: parseInt(page),
+      totalDataCount,
+      count: games.length,
+      data: games,
+    });
+  } catch (err) {
+    console.log("controller@listAllGame", err);
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      error: "Internal Server Error",
+    });
+  }
+};
 module.exports = {
   createGame,
+  listAllGame,
 };
