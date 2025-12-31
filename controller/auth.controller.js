@@ -38,7 +38,7 @@ const login = async (req, res) => {
       process.env.JWT_SECRET
     );
     res.cookie("token", token, {
-      maxAge: 1000 * 60 * 60,
+      maxAge: 1000 * 60 *60,
       httpOnly: true,
     });
     return res.status(200).json({
@@ -84,7 +84,7 @@ const signup = async (req, res) => {
     });
     const token = await jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
     res.cookie("token", token, {
-      maxAge: 1000 * 60 * 60,
+      maxAge: 1000 * 60 *60,
       httpOnly: true,
     });
     const userData = newUser.toObject();

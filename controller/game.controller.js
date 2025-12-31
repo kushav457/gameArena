@@ -1,5 +1,7 @@
 const gameModel = require("../model/game.model");
 const userModel = require("../model/user.model");
+const {sendEmail} = require("../utils/utility");
+//Create a new game
 
 const createGame = async (req, res) => {
   try {
@@ -124,7 +126,17 @@ const approveGame = async (req, res) => {
     //   });
     // }
 
-    const game = await gameModel.findByIdAndUpdate(id, { status: "approved" });
+    const game = await gameModel.findByIdAndUpdate(id, { status: "approved" }).populate(
+      "createdBy",
+      "name email"
+    );
+    console.log("game", game);
+    await sendEmail({
+      to: game.createdBy.email,
+      subject: "Game Approved Successfully",
+      text: `Congratulations ${game.createdBy.name}, Your game "${game.title}" has been approved. Yaaayyyyyyyyy!!!!!1`,
+    });
+
 
     if (!game) {
       return res.status(404).json({

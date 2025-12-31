@@ -5,14 +5,14 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth.route");
 const gameRouter = require("./routes/gaming.route");
 const cookieParser = require("cookie-parser");
-
+const userRouter = require("./routes/user.route");
 
 const port = 5001;
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 //mongoDb connetion
 mongoose
   .connect(process.env.MONGO_URI, {})
@@ -23,14 +23,15 @@ mongoose
     console.log("Error connecting to MongoDB", err);
   });
 
-app.get("/",(req,res)=>{
-    return res.json({
-        sucess:true,
-        message:"Hello Server",
-    })
-})
-app.use("/api/v1/auth",authRouter);
-app.use("/api/v1/game",gameRouter);
+app.get("/", (req, res) => {
+  return res.json({
+    sucess: true,
+    message: "Hello Server",
+  });
+});
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/game", gameRouter);
+app.use("/api/v1/update", userRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
