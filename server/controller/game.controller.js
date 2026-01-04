@@ -334,6 +334,49 @@ const updateGame = async (req, res) => {
     });
   } //to do
 };
+const countGamePlayedBy = async (req, res) => {
+  try {
+    const { gameId, userId } = req.body;
+
+    if (!gameId || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Game ID and User ID are required",
+      });
+    }
+
+    const game = await gameModel.findById(gameId);
+
+    if (!game) {
+      return res.status(404).json({
+        success: false,
+        message: "Game not found",
+      });
+    }
+
+    // Save who played last
+    game.playedBy = userId;
+
+    // Increase play count
+    game.totalPlayedBy += 1;
+
+    await game.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Play count updated",
+      data: game.totalPlayedBy,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      error: "Internal Server Error",
+    });
+  }
+};
+
+
 module.exports = {
   createGame,
   listAllGame,
@@ -342,4 +385,5 @@ module.exports = {
   listOfGameForDevelopers,
   deleteGame,
   updateGame,
+  countGamePlayedBy,
 };

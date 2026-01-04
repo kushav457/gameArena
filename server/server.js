@@ -9,6 +9,11 @@ const cors = require("cors");
 const userRouter = require("./routes/user.route");
 
 const port = 5001;
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 // CORS configuration
 const corsOptions = {
   origin: process.env.FRONTEND_URL || "http://localhost:3000", 
@@ -21,10 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 //mongoDb connetion
 mongoose
   .connect(process.env.MONGO_URI, {})
