@@ -6,11 +6,16 @@
 // TODO : Implement Schema validation for game creation and updation
 // TODO : Implementing reviews and rating feature -- completed (02/01/2026)
 // TODO : Implementing Update and Delete functionality for reviews and ratings -- completed (04/01/2026)
-// TODO : Implement Listing for purchase/my games.
-// TODO : Player/Developer Stats 
 // TODO : User profile get Details -- Completed(31/12/2025)
-// TODO : Add indexing in MongoDb
+// TODO : Add indexing in MongoDb -- completed
+// TODO : Implement Cors Configuration --completed(02/01/2026)
+// TODO : Implement totalPlayedByCount of Count --completed(4/01/20)
+
+
 // TODO : Total PlayedBY in gameModel
 // TODO : Implement List of Trending Games,Freture Games,latest Game
 // TODO : Implement Play Game API
-// TODO  : Implement Cors Configuration --completed(02/01/2026)
+// TODO : Implement List of all aprroved games by admim
+// TODO : Implement free And prenium game in game model
+// TODO : Implement Listing for purchase/my games.
+// TODO : Player/Developer Stats (Total Uploads , Follower and list of games uploaded or played in case of user)

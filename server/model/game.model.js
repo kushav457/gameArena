@@ -55,14 +55,12 @@ const gameSchema = new mongoose.Schema(
       default: 0,
     },
     playedBy: {
-      type: mongoose.Types.ObjectId,
+      type:[ mongoose.Types.ObjectId],
       ref: "users",
       required: true,
+      
     },
-    totalPlayedBy: {
-  type: Number,
-  default: 0,
-},
+    
 
   },
   { timestamps: true }

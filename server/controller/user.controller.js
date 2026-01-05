@@ -1,23 +1,20 @@
 const userModel = require("../model/user.model");
 const getUser = async (req, res) => {
-  try { 
-   
-     const user = await userModel
-      .findById(req.user)
-      .select("name email age")
-       if (!user) {
+  try {
+    const user = await userModel.findById(req.user);
+
+    if (!user) {
       return res.status(404).json({
-        success:false, 
-        message: "User not found" ,
-        error:"Not Found"
+        success: false,
+        message: "User not found",
+        error: "Not Found",
       });
     }
 
-     return res.status(200).json({
+    return res.status(200).json({
       success: true,
-      data:user
+      data: user,
     });
-
   } catch (err) {
     console.log("controller@getUser", err.message);
     return res.status(500).json({
@@ -62,6 +59,10 @@ const updateUser = async (req, res) => {
     });
   }
 };
+// const forgotUserPassword{
+
+// }
 module.exports = {
-  updateUser,getUser
+  updateUser,
+  getUser,
 };

@@ -7,7 +7,7 @@ const {
   listOfGameForDevelopers,
   deleteGame,
   updateGame,
-  countGamePlayedBy,
+  playGame,
 } = require("../controller/game.controller");
 const { protectRoute, authorizeRoles } = require("../middleware/auth");
 const {
@@ -33,7 +33,7 @@ gameRouter.route("/:id").delete(authorizeRoles(["developer"]), deleteGame);
 //review routes
 gameRouter.route("/review").post(createReviewAndRating);
 //played by routes
-gameRouter.route("/playedby").post(countGamePlayedBy);
+gameRouter.route("/playgame").post(playGame);
 
 gameRouter
   .route("/review/:id")
