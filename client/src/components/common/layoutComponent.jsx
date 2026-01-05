@@ -12,7 +12,7 @@ import { setTheme, toggleTheme } from "@/redux/slices/themeSlice";
 import { logout } from "@/redux/slices/authSlice";
 import { authAPI } from "@/services/api";
 import { Button } from "@/components/common/uiComponents";
-import { GENRES } from "@/constants/genres";
+import { GENRES } from "@/data/genres";
 
 const cookies = new Cookies();
 

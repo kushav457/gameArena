@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, InputField, Button, Toast, Loader } from "@/components/common/uiComponents";
 import { gameAPI } from "@/services/api";
 import { Typography, FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
-import { GENRES } from "@/constants/genres";
+import { GENRES } from "@/data/genres";
 import { useRouter } from "next/router";
 
 export function UploadGameForm({ onSuccess }) {
