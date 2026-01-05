@@ -18,4 +18,4 @@
 // TODO : Implement List of all aprroved games by admim (can use list all games api with filter)
 // TODO : Implement free And prenium game in game model--completed(05/01/2026)
 // TODO : Implement  addToFavourites, removeFromFavourites and listFavouriteGames for user-- completed(05/01/2026)
-// TODO : Player/Developer Stats (Total Uploads , Follower and list of games uploaded or played in case of user)
+// TODO : Player/Developer Stats (Total Uploads , Follower and list of games uploaded or played in case of user)-- completed(06/01/2026)

@@ -40,6 +40,15 @@ const userSchema = new mongoose.Schema(
       enum: ["free", "premium"],
       default: "free",
     },
+    totalFollowers: {
+      type: Number,
+      default: 0,
+    },
+    totalFollowing: {
+      type: Number,
+      default: 0,
+    },
+    
   },
   { timestamps: true }
 );
