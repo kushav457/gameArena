@@ -165,57 +165,6 @@ export const gameAPI = {
       method: "DELETE",
     });
   },
-
-  // Play game
-  playGame: async (gameId) => {
-    return apiRequest("/game/playgame", {
-      method: "POST",
-      data: { gameId },
-    });
-  },
-
-  // Trending games
-  getTrendingGames: async () => {
-    return apiRequest("/game/trending", {
-      method: "GET",
-    });
-  },
-
-  // Popular games
-  getPopularGames: async () => {
-    return apiRequest("/game/popular", {
-      method: "GET",
-    });
-  },
-
-  // Latest games
-  getLatestGames: async () => {
-    return apiRequest("/game/latest", {
-      method: "GET",
-    });
-  },
-
-  // Add to favourites
-  addToFavourite: async (gameId) => {
-    return apiRequest("/game/favourite", {
-      method: "POST",
-      data: { gameId },
-    });
-  },
-
-  // Remove from favourites
-  removeFromFavourite: async (gameId) => {
-    return apiRequest(`/game/favourite/${gameId}`, {
-      method: "DELETE",
-    });
-  },
-
-  // List favourite games
-  listFavouriteGames: async () => {
-    return apiRequest("/game/favourite", {
-      method: "GET",
-    });
-  },
 };
 
 // Review API

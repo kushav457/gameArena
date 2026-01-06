@@ -16,6 +16,7 @@ export default function HomeContent({
   showFeaturedGames = true,
   showPopularGames = true,
   showPlatformFeatures = true,
+  showViewAll = true,
   filters = null
 }) {
   const [games, setGames] = useState([]);
@@ -56,10 +57,10 @@ export default function HomeContent({
       {showHero && <HeroSection subtitle={heroSubtitle} />}
       {showFeaturedGames && (
         <Box id="featured-games">
-          <GameCategory title="FEATURED GAMES" description="Handpicked featured games found by the community" category="featured" games={featuredGames} />
+          <GameCategory title="FEATURED GAMES" description="Handpicked featured games found by the community" category="featured" games={featuredGames} showViewAll={showViewAll} />
         </Box>
       )}
-      {showPopularGames && <GameCategory title="POPULAR GAMES" description="Trending games loved by the community" category="popular" games={popularGames} />}
+      {showPopularGames && <GameCategory title="POPULAR GAMES" description="Trending games loved by the community" category="popular" games={popularGames} showViewAll={showViewAll} />}
       {games.length > 0 && (
         <Box sx={{ maxWidth: "1200px", margin: "0 auto", padding: { xs: "24px", md: "48px" } }}>
           {loading ? (

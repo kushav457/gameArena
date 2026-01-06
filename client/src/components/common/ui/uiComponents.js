@@ -13,8 +13,17 @@ export function Button({ label, onClick, type = "button", variant = "primary", i
   return <Comp type={type} disabled={disabled} onClick={onClick} {...iconProps} sx={styles} {...props}>{!iconOnly && label}</Comp>;
 }
 
-export function Card({ children, hoverable = true }) {
-  return hoverable ? <CyberCard sx={{ padding: "16px" }}>{children}</CyberCard> : <MuiCard sx={{ padding: "16px" }}>{children}</MuiCard>;
+export function Card({ children, hoverable = true, sx, ...props }) {
+  const baseSx = { padding: "16px", ...sx };
+  return hoverable ? (
+    <CyberCard sx={baseSx} {...props}>
+      {children}
+    </CyberCard>
+  ) : (
+    <MuiCard sx={baseSx} {...props}>
+      {children}
+    </MuiCard>
+  );
 }
 
 export function InputField({ label, type = "text", value, onChange, placeholder, error, helperText, name, multiline, rows, ...props }) {

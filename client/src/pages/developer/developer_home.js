@@ -23,7 +23,7 @@ export default function DeveloperHome() {
         <title>Developer Home | CyberArena</title>
       </Head>
       <DeveloperLayout>
-        <HomeContent heroSubtitle="Build, publish, and grow your games" showPlatformFeatures={false} />
+        <HomeContent heroSubtitle="Build, publish, and grow your games" showPlatformFeatures={false} showViewAll={false} />
       </DeveloperLayout>
     </>
   );

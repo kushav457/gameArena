@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import { userAPI } from "@/services/api";
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb5d19c1a00e8b4e7ca849d39857508b1d44c067
 import UserLayout from "@/components/user/UserLayout";
 import {
   ProfilePageContainer,

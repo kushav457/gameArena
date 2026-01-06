@@ -1,13 +1,9 @@
 import Head from "next/head";
 import { Container, Typography, Box, Grid } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import UserLayout from "@/components/user/UserLayout";
 import { Card, Button } from "@/components/common/ui/uiComponents";
 
 export default function UserUpgrade() {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
-
   const handleUpgrade = () => {
     // TODO: Navigate to payment module when integrated
     console.log("Navigate to payment module");
@@ -30,6 +26,7 @@ export default function UserUpgrade() {
               letterSpacing: "2px",
               mb: 4,
               textAlign: "center",
+              color: (theme) => theme.palette.text.primary,
             }}
           >
             Upgrade Account
@@ -49,28 +46,28 @@ export default function UserUpgrade() {
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                         mb: 2,
-                        color: theme.palette.text.primary,
+                        color: (theme) => theme.palette.text.primary,
                       }}
                     >
                       Free Plan
                     </Typography>
-                    <Typography variant="h3" sx={{ mb: 3, color: theme.palette.secondary.main }}>
+                    <Typography variant="h3" sx={{ mb: 3, color: (theme) => theme.palette.secondary.main }}>
                       $0
-                      <Typography component="span" variant="body2" sx={{ color: theme.palette.text.secondary, ml: 1 }}>
+                      <Typography component="span" variant="body2" sx={{ color: (theme) => theme.palette.text.secondary, ml: 1 }}>
                         /month
                       </Typography>
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Access to free games
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Basic game features
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Community reviews
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Standard support
                       </Typography>
                     </Box>
@@ -97,34 +94,34 @@ export default function UserUpgrade() {
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                         mb: 2,
-                        color: theme.palette.text.primary,
+                        color: (theme) => theme.palette.text.primary,
                       }}
                     >
                       Premium Plan
                     </Typography>
-                    <Typography variant="h3" sx={{ mb: 3, color: theme.palette.secondary.main }}>
+                    <Typography variant="h3" sx={{ mb: 3, color: (theme) => theme.palette.secondary.main }}>
                       $9.99
-                      <Typography component="span" variant="body2" sx={{ color: theme.palette.text.secondary, ml: 1 }}>
+                      <Typography component="span" variant="body2" sx={{ color: (theme) => theme.palette.text.secondary, ml: 1 }}>
                         /month
                       </Typography>
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ All free plan features
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Access to premium games
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Early access to new releases
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Ad-free experience
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Priority support
                       </Typography>
-                      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                      <Typography variant="body2" sx={{ color: (theme) => theme.palette.text.secondary }}>
                         ✓ Exclusive content
                       </Typography>
                     </Box>
