@@ -22,6 +22,7 @@ export default function AdminPage() {
   const [totalGames, setTotalGames] = useState(0);
   const [acceptedGames, setAcceptedGames] = useState(0);
   const [rejectedGames, setRejectedGames] = useState(0);
+  const [pendingGames, setPendingGames] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -84,8 +85,8 @@ export default function AdminPage() {
 
   const fetchTotalGames = async () => {
     try {
-      const response = await gameAPI.listAllGames({ limit: 1000 });
-      setTotalGames(response.totalDataCount || 0);
+      const response = await gameAPI.listAllGames({ limit: 10, page: 1 });
+      //setTotalGames(response.totalDataCount || 0);
     } catch (err) {
       console.error("Failed to fetch total games:", err);
     }
@@ -96,7 +97,8 @@ export default function AdminPage() {
       const response = await gameAPI.getGameStats();
       if (response?.success && response?.data) {
         setAcceptedGames(response.data.approved || 0);
-        setRejectedGames(response.data.rejected || 0);
+       // setRejectedGames(response.data.rejected || 0);
+       setPendingGames(response.data.pending || 0);
         setTotalGames(response.data.total || 0);
       }
     } catch (err) {
@@ -128,7 +130,7 @@ export default function AdminPage() {
       return;
     }
     try {
-      await gameAPI.deleteGame(gameId);
+      await gameAPI.rejectGame(gameId);
       setError(null);
       setSuccessMessage("Game rejected successfully!");
       setShowToast(true);
@@ -213,8 +215,8 @@ export default function AdminPage() {
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <StatCard
-                    title="Games Rejected"
-                    value={rejectedGames}
+                    title="Games Pending"
+                    value={pendingGames}
                     icon={CancelIcon}
                   />
                 </Grid>

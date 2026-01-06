@@ -14,6 +14,8 @@ const {
   listFavouriteGames,
   addToFavourite,
   removeFromFavourite,
+  getGameStats,
+  rejectGame,
 } = require("../controller/game.controller");
 const { protectRoute, authorizeRoles } = require("../middleware/auth");
 const {
@@ -51,5 +53,7 @@ gameRouter.route("/popular").get(popularGames);
 gameRouter.route("/latest").get(latestGames);
 gameRouter.route("/favourite").get(listFavouriteGames).post(addToFavourite);
 gameRouter.route("/favourite/:gameId").delete(removeFromFavourite);
+gameRouter.route("/stats").get(authorizeRoles(["admin"]), getGameStats);
+gameRouter.route("/reject/:id").delete(authorizeRoles(["admin"]), rejectGame);
 
 module.exports = gameRouter;

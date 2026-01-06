@@ -41,8 +41,7 @@ const createGame = async (req, res) => {
       desc,
       createdBy: req.user,
       status: "pending",
-      isFree: isFree ,
-      
+      isFree: isFree,
     });
     return res.status(200).json({
       sucess: true,
@@ -542,6 +541,66 @@ const listFavouriteGames = async (req, res) => {
     });
   }
 };
+const getGameStats = async (req, res) => {
+  try {
+    //to do
+    const [totalGames, totalApprovedGames, totalPendingGames] =
+      await Promise.all([
+        gameModel.countDocuments(),
+        gameModel.countDocuments({ status: "approved" }),
+        gameModel.countDocuments({ status: "pending" }),
+      ]);
+    return res.status(200).json({
+      success: true,
+      data: {
+        total: totalGames,
+        approved: totalApprovedGames,
+        pending: totalPendingGames,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      error: "Internal Server Error",
+    });
+  }
+};
+const rejectGame = async (req, res) => {
+  //to do
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Game id is missing",
+
+        error: "Bad Request",
+      });
+    }
+    const game = await gameModel.findByIdAndDelete(id);
+
+    if (!game) {
+      return res.status(404).json({
+        success: false,
+        message: "Game not found",
+        error: "Not Found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Game rejected successfully",
+      data: game,
+    });
+  } catch (err) {
+    console.log("controller@rejectGame", err.message);
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+      error: "Internal Server Error",
+    });
+  }
+};
 
 module.exports = {
   createGame,
@@ -558,4 +617,6 @@ module.exports = {
   addToFavourite,
   removeFromFavourite,
   listFavouriteGames,
+  getGameStats,
+  rejectGame,
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api/v1";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api/v1";
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
@@ -120,6 +121,12 @@ export const gameAPI = {
     });
   },
 
+  getGameStats: async () => {
+    return apiRequest("/game/stats", {
+      method: "GET",
+    });
+  },
+
   // List all approved games
   listAllGames: async (params = {}) => {
     return apiRequest("/game", {
@@ -159,9 +166,9 @@ export const gameAPI = {
     });
   },
 
-  // Delete game (developer only)
-  deleteGame: async (gameId) => {
-    return apiRequest(`/game/${gameId}`, {
+  // Reject game (admin only)
+  rejectGame: async (gameId) => {
+    return apiRequest(`/game/reject/${gameId}`, {
       method: "DELETE",
     });
   },
@@ -192,4 +199,3 @@ export const reviewAPI = {
     });
   },
 };
-
