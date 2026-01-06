@@ -125,6 +125,13 @@ export const gameAPI = {
       method: "DELETE",
     });
   },
+
+  // Get game statistics (admin only)
+  getGameStats: async () => {
+    return apiRequest("/game/stats", {
+      method: "GET",
+    });
+  },
 };
 
 // Review API

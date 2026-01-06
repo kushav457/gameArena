@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
+import { userAPI } from "@/services/api";
 
 import UserLayout from "@/components/user/UserLayout";
 import {
