@@ -3,7 +3,7 @@ import { Box, Typography, Grid } from "@mui/material";
 import { gameAPI } from "@/services/api";
 import { GameCard } from "@/components/game/gameComponents";
 import { Loader, Toast, Button } from "@/components/common/ui/uiComponents";
-import { GameCategory, PlatformFeatures } from "@/components/home/homeComponents";
+import { GameCategory } from "@/components/home/homeComponents";
 import HeroSection from "@/components/home/HeroSection";
 import { featuredGames, popularGames } from "@/data/gameData";
 
@@ -60,7 +60,6 @@ export default function HomeContent({
         </Box>
       )}
       {showPopularGames && <GameCategory title="POPULAR GAMES" description="Trending games loved by the community" category="popular" games={popularGames} />}
-      {showPlatformFeatures && <PlatformFeatures />}
       {games.length > 0 && (
         <Box sx={{ maxWidth: "1200px", margin: "0 auto", padding: { xs: "24px", md: "48px" } }}>
           {loading ? (

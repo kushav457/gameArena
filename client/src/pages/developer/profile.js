@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
+import { userAPI } from "@/services/api";
 import DeveloperLayout from "@/components/developer/DeveloperLayout";
 import {
   ProfilePageContainer,
@@ -16,13 +17,24 @@ export default function DeveloperProfile() {
   const { userData, setUserData, passwordData, setPasswordData, error, setError, success, setSuccess, handlePasswordChange } = useProfileForm();
 
   useEffect(() => {
-    // TODO: Load user data from API
-    setUserData({
-      name: "Developer Name",
-      email: "developer@example.com",
-      age: "25",
-    });
-  }, [setUserData]);
+    const fetchUser = async () => {
+      try {
+        const res = await userAPI.getUser();
+  
+        if (res?.success && res?.data) {
+          setUserData({
+            name: res.data.name || "",
+            email: res.data.email || "",
+            age: res.data.age || "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch developer profile", err);
+      }
+    };
+  
+    fetchUser();
+  }, []);
 
   return (
     <>

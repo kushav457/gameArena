@@ -23,7 +23,7 @@ export default function UserHome() {
         <title>User Home | CyberArena</title>
       </Head>
       <UserLayout>
-        <HomeContent heroSubtitle="Join a growing community and explore something unique" />
+        <HomeContent heroSubtitle="Join a growing community and explore something unique" showPlatformFeatures={false} />
       </UserLayout>
     </>
   );

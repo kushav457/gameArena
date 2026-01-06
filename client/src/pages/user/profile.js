@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
+
 import UserLayout from "@/components/user/UserLayout";
 import {
   ProfilePageContainer,
@@ -16,13 +17,24 @@ export default function UserProfile() {
   const { userData, setUserData, passwordData, setPasswordData, error, setError, success, setSuccess, handlePasswordChange } = useProfileForm();
 
   useEffect(() => {
-    // TODO: Load user data from API
-    setUserData({
-      name: "User Name",
-      email: "user@example.com",
-      age: "25",
-    });
-  }, [setUserData]);
+    const fetchUser = async () => {
+      try {
+        const res = await userAPI.getUser();
+  
+        if (res?.success && res?.data) {
+          setUserData({
+            name: res.data.name || "",
+            email: res.data.email || "",
+            age: res.data.age || "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch user profile", err);
+      }
+    };
+  
+    fetchUser();
+  }, []);
 
   return (
     <>
