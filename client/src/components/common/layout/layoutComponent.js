@@ -5,6 +5,7 @@ import { CssBaseline, ThemeProvider, AppBar, Toolbar, Typography, IconButton, Bo
 import { useTheme } from "@mui/material/styles";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Cookies } from "react-cookie";
 
 import { lightTheme, darkTheme } from "@/styles/mui/theme";
@@ -25,7 +26,7 @@ const NAV_LINKS = [
 const ROLE_BUTTONS = {
   user: [["Games", "secondary", "/user/home"], ["Profile", "primary", "/user/profile"]],
   developer: [["Home", "secondary", "/developer/developer_home"], ["Dashboard", "secondary", "/developer/dashboard"], ["Upload Game", "primary", "/developer/upload"]],
-  admin: [["Admin Panel", "primary", "/admin"]],
+  admin: [["Admin Panel", "primary", "/admin/admin"]],
 };
 
 const FOOTER_LINKS = ["About", "Privacy", "Terms", "Contact"];
@@ -84,7 +85,26 @@ function NavBar({ filters, onFilterChange }) {
           ) : (
             <>
               {ROLE_BUTTONS[role]?.map(([label, variant, href]) => <Button key={label} label={label} variant={variant} onClick={() => router.push(href)} />)}
-              <Button label="Logout" variant="secondary" onClick={() => setLogoutDialogOpen(true)} />
+              {role === "admin" ? (
+                <IconButton
+                  aria-label="Logout"
+                  onClick={() => setLogoutDialogOpen(true)}
+                  sx={{
+                    color: muiTheme.palette.text.primary,
+                    border: `1px solid ${isDark ? "rgba(56,189,248,0.25)" : "rgba(56,189,248,0.3)"}`,
+                    borderRadius: "10px",
+                    "&:hover": {
+                      transform: "scale(1.08)",
+                      filter: "drop-shadow(0 0 6px rgba(56, 189, 248, 0.65))",
+                    },
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <LogoutIcon fontSize="small" />
+                </IconButton>
+              ) : (
+                <Button label="Logout" variant="secondary" onClick={() => setLogoutDialogOpen(true)} />
+              )}
             </>
           )}
         </Box>

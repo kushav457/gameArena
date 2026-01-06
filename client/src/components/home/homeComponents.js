@@ -28,7 +28,7 @@ export function Hero() {
   );
 }
 
-export function GameCategory({ title, description, games = [], category }) {
+export function GameCategory({ title, description, games = [], category, showViewAll = true }) {
   const theme = useTheme();
   const router = useRouter();
   const isDark = theme.palette.mode === "dark";
@@ -46,9 +46,11 @@ export function GameCategory({ title, description, games = [], category }) {
               {description}
             </Typography>
           </Box>
-          <Link href={`/games?category=${categorySlug}`} style={{ textDecoration: "none", color: theme.palette.secondary.main, fontSize: "14px", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px", transition: "opacity 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.opacity = "0.8"} onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>
-            View All Games →
-          </Link>
+          {showViewAll && (
+            <Link href={`/games?category=${categorySlug}`} style={{ textDecoration: "none", color: theme.palette.secondary.main, fontSize: "14px", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px", transition: "opacity 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.opacity = "0.8"} onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>
+              View All Games →
+            </Link>
+          )}
         </Box>
 
         <Box sx={{ display: "flex", gap: "16px", overflowX: "auto", paddingBottom: "16px", scrollbarWidth: "thin", scrollbarColor: `${theme.palette.secondary.main}40 transparent`, "&::-webkit-scrollbar": { height: "8px" }, "&::-webkit-scrollbar-track": { background: "transparent" }, "&::-webkit-scrollbar-thumb": { background: isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(56, 189, 248, 0.2)", borderRadius: "4px", "&:hover": { background: isDark ? "rgba(56, 189, 248, 0.5)" : "rgba(56, 189, 248, 0.4)" } } }}>

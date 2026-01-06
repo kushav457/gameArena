@@ -78,7 +78,15 @@ export default function LoginPage() {
       dispatch(login({ token: response.token, role }));
 
       const normalizedRole = role.toLowerCase().trim();
-      router.push(normalizedRole === "developer" ? "/developer/developer_home" : "/user/home");
+      let redirectPath = "/user/home"; // Default
+
+      if (normalizedRole === "developer") {
+      redirectPath = "/developer/developer_home";
+      } else if (normalizedRole === "admin") {
+      redirectPath = "/admin/admin";
+      }
+
+router.push(redirectPath);
     } catch (err) {
       console.error("Login error:", err);
       const errorMessage = err?.response?.data?.message || err?.message || "An error occurred during login";
