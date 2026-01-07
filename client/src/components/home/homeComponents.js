@@ -55,7 +55,26 @@ export function GameCategory({ title, description, games = [], category, showVie
 
         <Box sx={{ display: "flex", gap: "16px", overflowX: "auto", paddingBottom: "16px", scrollbarWidth: "thin", scrollbarColor: `${theme.palette.secondary.main}40 transparent`, "&::-webkit-scrollbar": { height: "8px" }, "&::-webkit-scrollbar-track": { background: "transparent" }, "&::-webkit-scrollbar-thumb": { background: isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(56, 189, 248, 0.2)", borderRadius: "4px", "&:hover": { background: isDark ? "rgba(56, 189, 248, 0.5)" : "rgba(56, 189, 248, 0.4)" } } }}>
           {games.map((game, i) => (
-            <Card key={i} onClick={() => router.push("/")} sx={{ minWidth: "200px", maxWidth: "200px", cursor: "pointer", background: theme.palette.background.paper, border: `1px solid ${isDark ? "rgba(56, 189, 248, 0.25)" : "rgba(56, 189, 248, 0.2)"}`, transition: "transform 0.25s ease, box-shadow 0.25s ease", "&:hover": { transform: "translateY(-4px)", boxShadow: isDark ? "0 8px 24px rgba(56, 189, 248, 0.3)" : "0 8px 24px rgba(56, 189, 248, 0.2)" } }}>
+            <Card
+              key={i}
+              onClick={() => {
+                if (game?.href) router.push(game.href);
+              }}
+              sx={{
+                minWidth: "200px",
+                maxWidth: "200px",
+                cursor: game?.href ? "pointer" : "default",
+                background: theme.palette.background.paper,
+                border: `1px solid ${isDark ? "rgba(56, 189, 248, 0.25)" : "rgba(56, 189, 248, 0.2)"}`,
+                transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                "&:hover": game?.href
+                  ? {
+                      transform: "translateY(-4px)",
+                      boxShadow: isDark ? "0 8px 24px rgba(56, 189, 248, 0.3)" : "0 8px 24px rgba(56, 189, 248, 0.2)",
+                    }
+                  : {},
+              }}
+            >
               <CardMedia component="img" height="280" image={game.image || "/placeholder-game.png"} alt={game.name} sx={{ objectFit: "cover", background: isDark ? "rgba(34, 48, 80, 0.5)" : "rgba(248, 250, 252, 0.5)" }} />
               <CardContent sx={{ padding: "16px", background: theme.palette.background.paper }}>
                 <Typography variant="h6" component="h3" sx={{ fontWeight: 600, color: theme.palette.text.primary, marginBottom: "8px", fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>

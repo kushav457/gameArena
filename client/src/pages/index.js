@@ -7,7 +7,7 @@ import { Loader } from "@/components/common/ui/uiComponents";
 import Layout from "@/components/common/layout/layoutComponent";
 import HomeContent from "@/components/home/HomeContent";
 import { GameCategory, Hero, PlatformFeatures } from "@/components/home/homeComponents";
-import { racingGames, actionGames } from "@/data/gameData";
+import { oneTapGames, racingGames, actionGames } from "@/data/gameData";
 
 const cookies = new Cookies();
 
@@ -38,6 +38,7 @@ export default function Home() {
       </Head>
       <Layout filters={filters} onFilterChange={handleFilterChange}>
         <Hero />
+        <GameCategory title="ONE TAP GAMES" description="Quick, addictive games you can play in seconds" category="one-tap" games={oneTapGames} />
         <HomeContent filters={filters} showHero={false} showPlatformFeatures={false} />
         <GameCategory title="RACING GAMES" description="Fast-paced racing action" category="racing" games={racingGames} />
         <GameCategory title="ACTION GAMES" description="Thrilling action-packed adventures" category="action" games={actionGames} />
