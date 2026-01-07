@@ -1,0 +1,107 @@
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #020617;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+}
+
+.wrap {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.topbar {
+  width: min(720px, 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: #e5e7eb;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(2, 6, 23, 0.35);
+  color: #e5e7eb;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+  border-color: rgba(56, 189, 248, 0.55);
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.75), rgba(56, 189, 248, 0.75));
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.btnPrimary:hover {
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.4);
+}
+
+.title {
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.hint {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+canvas#game {
+  width: min(420px, 92vw);
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+  background: radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.18), rgba(2, 6, 23, 0.85));
+}
+
+.hud {
+  width: min(420px, 92vw);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e5e7eb;
+}
+
+.score {
+  font-size: 28px;
+  font-weight: 700;
+  color: #38bdf8;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.msg {
+  color: #94a3b8;
+  font-size: 12px;
+  width: min(420px, 92vw);
+  text-align: center;
+}
+
+
