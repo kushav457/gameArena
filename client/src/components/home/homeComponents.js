@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Box, Typography, Card, CardMedia, CardContent, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { CyberCard } from "@/styles/mui/customComponents";
+import { playCardHoverSound } from "@/utils/hoverSound";
 
 const FEATURES = [
   { name: "CURATED LIBRARY", description: "Play to discover.", icon: <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h12M6 14h8"/></svg> },
@@ -33,6 +35,9 @@ export function GameCategory({ title, description, games = [], category, showVie
   const router = useRouter();
   const isDark = theme.palette.mode === "dark";
   const categorySlug = category || title.toLowerCase().replace(/\s+/g, '-').replace(/-games$/, '').replace(/games$/, '').trim();
+  useEffect(() => {
+    playCardHoverSound();
+  }, []);
 
   return (
     <Box component="section" sx={{ width: "100%", marginBottom: "64px" }}>
@@ -60,19 +65,22 @@ export function GameCategory({ title, description, games = [], category, showVie
               onClick={() => {
                 if (game?.href) router.push(game.href);
               }}
+              onMouseEnter={playCardHoverSound}
               sx={{
                 minWidth: "200px",
                 maxWidth: "200px",
                 cursor: game?.href ? "pointer" : "default",
                 background: theme.palette.background.paper,
                 border: `1px solid ${isDark ? "rgba(56, 189, 248, 0.25)" : "rgba(56, 189, 248, 0.2)"}`,
-                transition: "transform 0.25s ease, box-shadow 0.25s ease",
-                "&:hover": game?.href
-                  ? {
-                      transform: "translateY(-4px)",
-                      boxShadow: isDark ? "0 8px 24px rgba(56, 189, 248, 0.3)" : "0 8px 24px rgba(56, 189, 248, 0.2)",
-                    }
-                  : {},
+                transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+                boxShadow: "0 0 0 rgba(56, 189, 248, 0)",
+                "&:hover": {
+                  transform: "translateY(-4px)",
+                  borderColor: "rgba(56, 189, 248, 0.65)",
+                  boxShadow:
+                    "0 0 24px rgba(56, 189, 248, 0.35), 0 0 40px rgba(56, 189, 248, 0.25)",
+                  filter: "drop-shadow(0 0 20px rgba(56, 189, 248, 0.35))",
+                },
               }}
             >
               <CardMedia component="img" height="280" image={game.image || "/placeholder-game.png"} alt={game.name} sx={{ objectFit: "cover", background: isDark ? "rgba(34, 48, 80, 0.5)" : "rgba(248, 250, 252, 0.5)" }} />

@@ -1,6 +1,7 @@
 import { Card, Button } from "@/components/common/ui/uiComponents";
 import { Box, Typography, Rating, Chip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { playCardHoverSound } from "@/utils/hoverSound";
 
 export function GameCard({
   title,
@@ -13,7 +14,21 @@ export function GameCard({
   const theme = useTheme();
 
   return (
-    <Card>
+    <Card
+      sx={{
+        cursor: "pointer",
+        border: `1px solid ${theme.palette.mode === "dark" ? "rgba(56, 189, 248, 0.25)" : "rgba(56, 189, 248, 0.2)"}`,
+        boxShadow: "0 0 0 rgba(56, 189, 248, 0)",
+        transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+        "&:hover": {
+          transform: "translateY(-6px)",
+          borderColor: "rgba(56, 189, 248, 0.6)",
+          boxShadow: "0 0 28px rgba(56, 189, 248, 0.35), 0 0 40px rgba(56, 189, 248, 0.2)",
+          filter: "drop-shadow(0 0 20px rgba(56, 189, 248, 0.35))",
+        },
+      }}
+      onMouseEnter={playCardHoverSound}
+    >
       <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <Box
           sx={{
