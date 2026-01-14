@@ -11,13 +11,25 @@ import {
   List, 
   ListItem,
   ListItemButton,
-  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { Cookies } from "react-cookie";
 import { Button } from "@/components/common/ui/uiComponents";
 import { CyberCard, CyberTextField } from "@/styles/mui/customComponents";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { authAPI } from "@/services/api";
+import { logout } from "@/redux/slices/authSlice";
+
+const cookies = new Cookies();
 
 export function AdminGameTable({ games, onApprove, onReject, searchQuery, onSearchChange }) {
   const theme = useTheme();
@@ -127,13 +139,24 @@ export function AdminGameTable({ games, onApprove, onReject, searchQuery, onSear
 export function AdminSidebar({ currentPath }) {
   const theme = useTheme();
   const router = useRouter();
+  const dispatch = useDispatch();
   const isDark = theme.palette.mode === "dark";
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
   const menuItems = [
     { label: "Games", path: "/admin/admin" },
-    { label: "Users", path: "/admin/users" },
-    { label: "Reports", path: "/admin/reports" },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await authAPI.logout();
+    } finally {
+      cookies.remove("token", { path: "/" });
+      cookies.remove("role", { path: "/" });
+      dispatch(logout());
+      router.push("/");
+    }
+  };
 
   return (
     <Box
@@ -194,7 +217,66 @@ export function AdminSidebar({ currentPath }) {
             </ListItem>
           );
         })}
+
+        {/* Logout */}
+        <ListItem disablePadding sx={{ mt: 2 }}>
+          <ListItemButton
+            onClick={() => setLogoutDialogOpen(true)}
+            sx={{
+              borderRadius: "8px",
+              padding: "12px 16px",
+              border: `1px solid ${isDark ? "rgba(239, 68, 68, 0.35)" : "rgba(239, 68, 68, 0.45)"}`,
+              color: "#ef4444",
+              "&:hover": {
+                backgroundColor: "rgba(239, 68, 68, 0.08)",
+                border: `1px solid ${isDark ? "rgba(239, 68, 68, 0.55)" : "rgba(239, 68, 68, 0.65)"}`,
+              },
+              transition: "all 0.25s ease",
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+            }}
+          >
+            <LogoutIcon fontSize="small" />
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Logout
+            </Typography>
+          </ListItemButton>
+        </ListItem>
       </List>
+
+      <Dialog
+        open={logoutDialogOpen}
+        onClose={() => setLogoutDialogOpen(false)}
+        PaperProps={{
+          sx: {
+            background: theme.palette.background.paper,
+            color: theme.palette.text.primary,
+            border: `1px solid ${isDark ? "rgba(56,189,248,0.25)" : "rgba(56,189,248,0.2)"}`,
+          },
+        }}
+      >
+        <DialogTitle>Confirm Logout</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ color: theme.palette.text.secondary }}>
+            Are you sure you want to quit?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            label="Cancel"
+            variant="secondary"
+            onClick={() => setLogoutDialogOpen(false)}
+          />
+          <Button
+            label="Yes"
+            onClick={() => {
+              setLogoutDialogOpen(false);
+              handleLogout();
+            }}
+          />
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
