@@ -132,11 +132,20 @@ const approveGame = async (req, res) => {
       .findByIdAndUpdate(id, { status: "approved" })
       .populate("createdBy", "name email");
     console.log("game", game);
-    await sendEmail({
-      to: game.createdBy.email,
-      subject: "Game Approved Successfully",
-      text: `Congratulations ${game.createdBy.name}, Your game "${game.title}" has been approved. Yaaayyyyyyyyy!!!!!1`,
-    });
+
+    // Don't fail approval if email sending fails (common in local dev without SMTP config)
+    try {
+      if (game?.createdBy?.email) {
+        await sendEmail({
+          to: game.createdBy.email,
+          subject: "Game Approved Successfully",
+          text: `Congratulations ${game.createdBy.name}, Your game "${game.title}" has been approved.`,
+        });
+      }
+    } catch (emailErr) {
+      console.log("controller@approveGame email failed:", emailErr.message);
+      // continue; approval already applied in DB
+    }
 
     if (!game) {
       return res.status(404).json({
